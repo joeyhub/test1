@@ -38,16 +38,6 @@ class AuthenticationSubscriber implements EventSubscriberInterface
             return;
         }
 
-        // Note: We can request it be sent in other ways and make life easier.
-        $header = $event->getRequest()->headers->get('Authorization');
-        $prefix = 'Bearer ';
-        $length = strlen($prefix);
-
-        if (!is_string($header) || strncmp($header, $prefix, $length)) {
-            throw new AccessDeniedHttpException('Authorization token not found.');
-        }
-
-        // Note: Exceptions from this may need to be converted into AccessDenied.
-        $this->service->validate(substr($header, $length));
+        $this->service->validate($event->getRequest());
     }
 }

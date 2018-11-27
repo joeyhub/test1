@@ -13,9 +13,8 @@ class LeagueService extends DoctrineService
             $repository = $entityManager->getRepository(League::class);
             $league = $repository->find($id);
 
-            // Note: Hidden error?
             if (null === $league) {
-                return;
+                throw new HttpException(Response::HTTP_NOT_FOUND, 'League not found!');
             }
 
             $entityManager->remove($league);
