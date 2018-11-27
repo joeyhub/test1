@@ -50,6 +50,8 @@ docker pull composer
 * There's a huge amount of reliance on type hinting for things such as validating the JSON however doctrine and symfony might do weird things to suppress it.
 * No support for API versioning.
 * No logging.
+* Tests do no aim for full coverage but rather examples.
+* Controller depends on data fixture. No automatic text data, mocks, etc.
 
 # Application setup (after git clone and moving to directory):
 
@@ -79,3 +81,6 @@ console doctrine:fixtures:load -q
 # Web:
 
 ```console server:run 0.0.0.0:8001```
+
+```composer bin/phpunit```
+
