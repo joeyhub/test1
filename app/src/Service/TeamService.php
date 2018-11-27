@@ -40,6 +40,7 @@ class TeamService extends DoctrineService
 
             // Note: It falls onto the database layer to produce a not unique exception.
             $team->setName($name);
+            $team->setStrip($strip);
             // Note: It might be more efficient to be able to set the league without reading it as long as the database layer supports foreign keys.
             $team->setLeague($league);
 
