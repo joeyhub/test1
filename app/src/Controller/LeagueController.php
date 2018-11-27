@@ -19,7 +19,7 @@ class LeagueController extends RestController
      */
     public function delete(string $id): Response
     {
-        $this->service->delete((int) $id, $input->name, $input->league);
+        $this->service->delete((int) $id);
 
         return HttpJsonTransport::respond(null);
     }

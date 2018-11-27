@@ -11,7 +11,7 @@ class LeagueService extends DoctrineService
     {
         $this->entityManager->transactional(function (EntityManagerInterface $entityManager) use ($id): void {
             $repository = $entityManager->getRepository(League::class);
-            $league = $repository->find($league);
+            $league = $repository->find($id);
 
             // Note: Hidden error?
             if (null === $league) {
