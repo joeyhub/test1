@@ -3,7 +3,6 @@
 namespace App\Tests\Model\Colour;
 
 use App\Model\Colour;
-
 use PHPUnit\Framework\TestCase;
 
 class ColourTest extends TestCase
@@ -15,15 +14,15 @@ class ColourTest extends TestCase
         $this->assertEquals($colour1, $colour2);
     }
 
-	public function testGetName(): void
-	{
-		$colour = Colour::getByName(Colour::BLUE);
+    public function testGetName(): void
+    {
+        $colour = Colour::getByName(Colour::BLUE);
         $this->assertEquals(Colour::BLUE, $colour->getName());
-	}
+    }
 
-	public function testInvalidName(): void
-	{
-		$this->expectException(\UnexpectedValueException::class);
-		Colour::getByName('invalid');
-	}
+    public function testInvalidName(): void
+    {
+        $this->expectException(\UnexpectedValueException::class);
+        Colour::getByName('invalid');
+    }
 }

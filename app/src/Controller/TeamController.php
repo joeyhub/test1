@@ -44,7 +44,7 @@ class TeamController extends RestController
     }
 
     /**
-     * @Route("/rest/team/list/byLeague/{league}", requirements={"league"="\d+"}, methods={"GET"})
+     * @Route("/rest/team/by/league/{league}", requirements={"league"="\d+"}, methods={"GET"})
      */
     public function listByLeague(string $league): Response
     {

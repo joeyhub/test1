@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpFoundation\Request;
 use Firebase\JWT\JWT;
 
@@ -9,8 +10,8 @@ class AuthenticationService
 {
     const ALGORITHM = 'HS256';
     const EXPIRATION = 600;
-	const HEADER = 'Authorization';
-	const PREFIX = 'Bearer ';
+    const HEADER = 'Authorization';
+    const PREFIX = 'Bearer ';
 
     private $secret;
 
@@ -30,7 +31,7 @@ class AuthenticationService
     public function validate(Request $request): void
     {
         // Note: We can request it be sent in other ways and make life easier.
-        $header = $event->getRequest()->headers->get(self::HEADER);
+        $header = $request->headers->get(self::HEADER);
         $length = strlen(self::PREFIX);
 
         if (!is_string($header) || strncmp($header, self::PREFIX, $length)) {
@@ -39,10 +40,10 @@ class AuthenticationService
 
         $token = substr($header, $length);
 
-		try {
-			JWT::decode($token, $this->secret, [self::ALGORITHM]);
-		} catch(UnexpectedValueException $exception) {
-			throw new AccessDeniedHttpException($exception->getMessage(), $exception);
-		}
+        try {
+            JWT::decode($token, $this->secret, [self::ALGORITHM]);
+        } catch (\UnexpectedValueException $exception) {
+            throw new AccessDeniedHttpException($exception->getMessage(), $exception);
+        }
     }
 }

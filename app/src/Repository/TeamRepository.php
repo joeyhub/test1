@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Team;
+use App\Entity\League;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -19,8 +20,8 @@ class TeamRepository extends ServiceEntityRepository
         parent::__construct($registry, Team::class);
     }
 
-    public function findByLeague(int $id): array
+    public function findByLeague(League $league): array
     {
-        return $this->findBy(['league' => $id]);
+        return $this->findBy(['league' => $league->getId()]);
     }
 }

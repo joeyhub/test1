@@ -48,6 +48,8 @@ docker pull composer
 * I've been very light on the PHPDoc (almost none).
 * The JWT authentication is just a demonstration, there's no user handling there and the token's not very useful without that embedded.
 * There's a huge amount of reliance on type hinting for things such as validating the JSON however doctrine and symfony might do weird things to suppress it.
+* No support for API versioning.
+* No logging.
 
 # Application setup (after git clone and moving to directory):
 

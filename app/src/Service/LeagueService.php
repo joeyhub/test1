@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\League;
 

@@ -17,16 +17,16 @@ class TeamService extends DoctrineService
         return $this->entityManager->getRepository(Team::class);
     }
 
-	private function getLeague(int $id): League
-	{
-		$league = $entityManager->getRepository(League::class)->find($id);
+    private function getLeague(int $id): League
+    {
+        $league = $entityManager->getRepository(League::class)->find($id);
 
-		if (null === $league) {
-			throw new HttpException(Response::HTTP_CONFLICT, 'League not found!');
-		}
+        if (null === $league) {
+            throw new HttpException(Response::HTTP_CONFLICT, 'League not found!');
+        }
 
-		return $league;
-	}
+        return $league;
+    }
 
     private function persistTeam(?int $id, string $name, Strip $strip, int $league): Team
     {
@@ -74,14 +74,18 @@ class TeamService extends DoctrineService
 
     public function findByLeague(int $id): array
     {
-		$this->entityManager->transactional(function (EntityManagerInterface $entityManager) use ($id) {
-			$league = $entityManager->getRepository(League::class)->find($id);
+        $teams = null;
 
-			if (null === $league) {
-				throw new HttpException(Response::HTTP_CONFLICT, 'League not found!');
-			}
+        $this->entityManager->transactional(function (EntityManagerInterface $entityManager) use ($id, &$teams) {
+            $league = $entityManager->getRepository(League::class)->find($id);
 
-			return $this->getRepository()->findByLeague($league);
-		});
+            if (null === $league) {
+                throw new HttpException(Response::HTTP_CONFLICT, 'League not found!');
+            }
+
+            $teams = $this->getRepository()->findByLeague($league);
+        });
+
+        return $teams;
     }
 }
