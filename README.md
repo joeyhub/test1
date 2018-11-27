@@ -47,6 +47,7 @@ docker pull composer
 * HttpJsonTransport is a horrible placeholder to be able to implement a better system of negotiating different transport schemes.
 * I've been very light on the PHPDoc (almost none).
 * The JWT authentication is just a demonstration, there's no user handling there and the token's not very useful without that embedded.
+* There's a huge amount of reliance on type hinting for things such as validating the JSON however doctrine and symfony might do weird things to suppress it.
 
 # Application setup (after git clone and moving to directory):
 
@@ -59,11 +60,11 @@ alias composer="docker run --rm -p 8001:8001 -it -v \"$PWD\"/app:/app composer"
 alias console="composer bin/console"
 ```
 
-Otherwise:
+## Otherwise:
 
 ```alias console="bin/console"```
 
-Setup:
+# Setup:
 
 ```
 cd app
